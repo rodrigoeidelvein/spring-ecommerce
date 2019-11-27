@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ecommecerce</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <header class="main-header">
+        <button id="side-menu-toggle">Menu</button>
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a th:classappend="${#httpServletRequest.requestURI.equals('/')} ? 'active' : ''" th:href="@{/}">Shop</a>
+                </li>
+                <li class="main-header__item">
+                    <a th:classappend="${#httpServletRequest.requestURI.equals('/products')} ? 'active' : ''"  th:href="@{/products}">Products</a>
+                </li>
+                <li class="main-header__item">
+                    <a th:classappend="${#httpServletRequest.requestURI.equals('/cart')} ? 'active' : ''"  th:href="@{/cart}">Cart</a>
+                </li>
+                <li class="main-header__item">
+                    <a th:classappend="${#httpServletRequest.requestURI.equals('/admin/add-product')} ? 'active' : ''"  th:href="@{/admin/add-product}">Add Product
+                    </a>
+                </li>
+                <li class="main-header__item">
+                    <a th:classappend="${#httpServletRequest.requestURI.equals('/admin/products')} ? 'active' : ''" th:href="@{/admin/products}">Admin Products
+                    </a>
+                </li>
+                <li class="main-header__item">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>
