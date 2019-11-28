@@ -43,7 +43,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void addToCart(int productId) {
+    public void addToCart(int productId, User user) {
 
     }
 }

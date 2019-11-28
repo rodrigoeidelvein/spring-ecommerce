@@ -1,8 +1,10 @@
 package br.com.ftec.ecommerce.controller;
 
 import br.com.ftec.ecommerce.model.Product;
+import br.com.ftec.ecommerce.model.User;
 import br.com.ftec.ecommerce.repository.ProductRepository;
 import br.com.ftec.ecommerce.repository.UserRepository;
+import br.com.ftec.ecommerce.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ import java.util.List;
 @Controller
 public class ShopController {
     @Autowired
-    private UserRepository userRepository;
+    UserService userService;
 
     @Autowired
     private ProductRepository productRepository;
@@ -59,7 +61,9 @@ public class ShopController {
     @PostMapping("/cart")
     public String PostCart(@RequestParam("productId") int productId, Authentication authentication) {
         log.info("Authenticated user: " + authentication.getName());
+        User user = userService.findUserByEmail(authentication.getName());
 
-        return "redirect:/product-list";
+
+        return "redirect:/products";
     }
 }
