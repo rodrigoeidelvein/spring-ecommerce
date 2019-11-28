@@ -1,7 +1,11 @@
 package br.com.ftec.ecommerce.controller;
 
+import br.com.ftec.ecommerce.model.Cart;
+import br.com.ftec.ecommerce.model.CartItem;
 import br.com.ftec.ecommerce.model.Product;
 import br.com.ftec.ecommerce.model.User;
+import br.com.ftec.ecommerce.repository.CartItemRepository;
+import br.com.ftec.ecommerce.repository.CartRepository;
 import br.com.ftec.ecommerce.repository.ProductRepository;
 import br.com.ftec.ecommerce.repository.UserRepository;
 import br.com.ftec.ecommerce.service.UserService;
@@ -25,6 +29,12 @@ public class ShopController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
     private static final Logger log = LoggerFactory.getLogger(ShopController.class);
 
@@ -62,7 +72,17 @@ public class ShopController {
     public String PostCart(@RequestParam("productId") int productId, Authentication authentication) {
         log.info("Authenticated user: " + authentication.getName());
         User user = userService.findUserByEmail(authentication.getName());
+        Cart cartExists = cartRepository.findByUser(user);
+        Product product = productRepository.findById(productId);
+        if (cartExists != null) {
+            CartItem itemExists = cartItemRepository.findByProductAndCart(product, cartExists);
+            if (itemExists != null) {
+                itemExists.setQuantity(itemExists.getQuantity() + 1);
+            } else {
+                CartItem item = new CartItem(cartExists, 1, product);
+            }
 
+        }
 
         return "redirect:/products";
     }
