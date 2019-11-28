@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>ecommecerce</title>
 
@@ -16,9 +16,9 @@
                 <li class="main-header__item">
                     <a th:classappend="${#httpServletRequest.requestURI.equals('/products')} ? 'active' : ''"  th:href="@{/products}">Products</a>
                 </li>
-                <li class="main-header__item">
+               <!-- <li class="main-header__item">
                     <a th:classappend="${#httpServletRequest.requestURI.equals('/cart')} ? 'active' : ''"  th:href="@{/cart}">Cart</a>
-                </li>
+                </li> -->
                 <li class="main-header__item">
                     <a th:classappend="${#httpServletRequest.requestURI.equals('/admin/add-product')} ? 'active' : ''"  th:href="@{/admin/add-product}">Add Product
                     </a>

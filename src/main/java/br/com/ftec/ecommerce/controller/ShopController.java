@@ -50,7 +50,7 @@ public class ShopController {
     }
 
     @GetMapping("/products")
-    public String ProductList(Model model) {
+    public String ProductList(Model model, Authentication authentication) {
         List<Product> products = new ArrayList();
         for (Product product : productRepository.findAll()) {
             products.add(product);

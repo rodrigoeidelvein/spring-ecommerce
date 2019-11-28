@@ -20,7 +20,6 @@ public class Product {
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
-        this.title = title;
     }
 
     @Override
