@@ -33,10 +33,10 @@ public class LoginController {
     public String RegisterForm(@ModelAttribute User user, @RequestParam(name = "role") String role) {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
-            return "login";
+            return "redirect:/login";
         } else {
             userService.saveUser(user, role);
-            return "login";
+            return "redirect:/login";
         }
     }
 }

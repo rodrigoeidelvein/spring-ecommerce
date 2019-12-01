@@ -19,16 +19,18 @@
                <!-- <li class="main-header__item">
                     <a th:classappend="${#httpServletRequest.requestURI.equals('/cart')} ? 'active' : ''"  th:href="@{/cart}">Cart</a>
                 </li> -->
-                <li class="main-header__item">
+                <li class="main-header__item" th:if="${isAdmin}">
                     <a th:classappend="${#httpServletRequest.requestURI.equals('/admin/add-product')} ? 'active' : ''"  th:href="@{/admin/add-product}">Add Product
                     </a>
                 </li>
-                <li class="main-header__item">
+                <li class="main-header__item" th:if="${isAdmin}">
                     <a th:classappend="${#httpServletRequest.requestURI.equals('/admin/products')} ? 'active' : ''" th:href="@{/admin/products}">Admin Products
                     </a>
                 </li>
-                <li class="main-header__item">
-                    <a th:href="@{/logout}">Logout</a>
+                <li class="main-header__item" >
+                    <span th:text="${currentUser}"></span>
+                    <a th:href="@{/logout}" th:if="${!currentUser.equals('')}">Logout</a>
+                    <a th:href="@{/login}" th:if="${currentUser.equals('')}">Login</a>
                 </li>
             </ul>
         </nav>
